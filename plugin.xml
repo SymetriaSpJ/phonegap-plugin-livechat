@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        id="phonegap-plugin-liveChat" version="0.0.7">
+
+    <name>LiveChat</name>
+    <description>LiveChat phonegap plugin</description>
+
+    <engines>
+        <engine name="cordova" version=">=5.0.0"/>
+    </engines>
+
+    <js-module src="www/liveChat.js" name="LiveChat">
+        <clobbers target="window.plugins.liveChat" />
+    </js-module>
+
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="LiveChat">
+                <param name="android-package" value="com.fitatu.phonegap.plugin.liveChat.Plugin"/>
+            </feature>
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/manifest">
+            <uses-permission android:name="android.permission.INTERNET" />
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <activity android:name="com.livechatinc.inappchat.ChatWindowActivity" android:configChanges="orientation|screenSize" />
+        </config-file>
+
+        <source-file src="src/android/LiveChat.java" target-dir="src/com/fitatu/phonegap/plugin/LiveChat/" />
+    </platform>
+</plugin>
