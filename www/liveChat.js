@@ -1,54 +1,53 @@
+var OPTIONAL_PARAM_DEFAULT_VALUE = "";
+
 function LiveChat() {}
 
-LiveChat.prototype.configure = function(options, successCallback, errorCallback) {
-    console.log('LiveChat::configure()', options);
-
+LiveChat.prototype.authorize = function(options, successCallback, errorCallback) {
     cordova.exec(
         successCallback,
         errorCallback,
         "LiveChat",
-        "configure",
-        [options]
+        "authorize",
+        [{
+            "license": options.license,
+            "groupId": options.groupId || OPTIONAL_PARAM_DEFAULT_VALUE,
+            "name": options.name || OPTIONAL_PARAM_DEFAULT_VALUE,
+            "email": options.email || OPTIONAL_PARAM_DEFAULT_VALUE
+        }]
     );
 };
 
-LiveChat.prototype.open = function() {
-    console.log('LiveChat::open()');
-
+LiveChat.prototype.open = function(successCallback, errorCallback) {
     cordova.exec(
-        null,
-        null,
+        successCallback,
+        errorCallback,
         "LiveChat",
         "open",
         []
     );
 };
 
-LiveChat.prototype.close = function() {
-    console.log('LiveChat::close()');
-
+LiveChat.prototype.destroy = function(successCallback, errorCallback) {
     cordova.exec(
-        null,
-        null,
+        successCallback,
+        errorCallback,
         "LiveChat",
-        "close",
+        "destroy",
         []
     );
 };
 
-LiveChat.prototype.isAgentAvailable = function(successCallback) {
-    console.log('LiveChat::isAgentAvailable()');
-
+LiveChat.prototype.isAgentAvailable = function(successCallback, errorCallback) {
     cordova.exec(
         successCallback,
-        null,
+        errorCallback,
         "LiveChat",
         "isAgentAvailable",
         []
     );
 };
 
-LiveChat.prototype.install = function() {
+LiveChat.install = function() {
     if (!window.plugins) {
         window.plugins = {};
     }
