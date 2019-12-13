@@ -1,0 +1,19 @@
+{
+  "name": "fitatu-phonegap-plugin-livechat",
+  "version": "0.0.1",
+  "description": "LiveChat phonegap plugin",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SymetriaSpJ/phonegap-plugin-livechat.git"
+  },
+  "author": "Fitatu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SymetriaSpJ/phonegap-plugin-livechat/issues"
+  },
+  "homepage": "https://github.com/SymetriaSpJ/phonegap-plugin-livechat#readme"
+}
