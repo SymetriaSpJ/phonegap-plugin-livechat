@@ -33,4 +33,14 @@
 
         <framework src="src/android/build-extras.gradle" custom="true" type="gradleReference" />
     </platform>
+
+    <platform name="ios">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="LiveChatCordovaPlugin">
+                <param name="ios-package" value="com.fitatu.phonegap.plugin.liveChat.LiveChatCordovaPlugin"/>
+            </feature>
+        </config-file>
+
+        <source-file src="src/ios/LiveChatCordovaPlugin.swift" />
+    </platform>
 </plugin>
