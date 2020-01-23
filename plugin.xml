@@ -43,7 +43,6 @@
         </config-file>
 
         <source-file src="src/ios/ChatView.swift"  target-dir="src"/>
-        <source-file src="src/ios/Info.plist"  target-dir="src"/>
         <source-file src="src/ios/JSONRequestCache.swift"  target-dir="src"/>
         <source-file src="src/ios/KeyboardNotification.swift"  target-dir="src"/>
         <source-file src="src/ios/LiveChat.swift"  target-dir="src"/>
