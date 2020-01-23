@@ -35,12 +35,45 @@
     </platform>
 
     <platform name="ios">
-        <config-file target="res/xml/config.xml" parent="/*">
-            <feature name="LiveChatCordovaPlugin">
-                <param name="ios-package" value="com.fitatu.phonegap.plugin.liveChat.LiveChatCordovaPlugin"/>
+        <config-file target="config.xml" parent="/*">
+            <feature name="LiveChat">
+                <param name="ios-package" value="LiveChat"/>
+                <param name="onload" value="true"/>
             </feature>
         </config-file>
 
-        <source-file src="src/ios/LiveChatCordovaPlugin.swift" />
+        <preference name="CAMERA_USAGE_DESCRIPTION" default="This app needs camera access"/>
+        <config-file target="*-Info.plist" parent="NSCameraUsageDescription">
+            <string>$CAMERA_USAGE_DESCRIPTION</string>
+        </config-file>
+
+        <preference name="PHOTOLIBRARY_ADD_USAGE_DESCRIPTION" default="This app needs write-access to photo library"/>
+        <config-file target="*-Info.plist" parent="NSPhotoLibraryAddUsageDescription">
+            <string>$PHOTOLIBRARY_ADD_USAGE_DESCRIPTION</string>
+        </config-file>
+
+        <preference name="PHOTOLIBRARY_USAGE_DESCRIPTION" default="This app needs read/write-access photo library access"/>
+        <config-file target="*-Info.plist" parent="NSPhotoLibraryUsageDescription">
+            <string>$PHOTOLIBRARY_USAGE_DESCRIPTION</string>
+        </config-file>
+
+        <source-file src="src/ios/ChatView.swift"  target-dir="src"/>
+        <source-file src="src/ios/Info.plist"  target-dir="src"/>
+        <source-file src="src/ios/JSONRequestCache.swift"  target-dir="src"/>
+        <source-file src="src/ios/KeyboardNotification.swift"  target-dir="src"/>
+        <source-file src="src/ios/LiveChat.swift"  target-dir="src"/>
+        <source-file src="src/ios/LiveChat.h"  target-dir="src"/>
+        <source-file src="src/ios/LiveChatConfiguration.swift"  target-dir="src"/>
+        <source-file src="src/ios/LiveChatMessage.swift"  target-dir="src"/>
+        <source-file src="src/ios/LiveChatOverlayViewController.swift"  target-dir="src"/>
+        <source-file src="src/ios/LiveChatState.swift"  target-dir="src"/>
+        <source-file src="src/ios/LiveChatWidget.js"  target-dir="src"/>
+        <source-file src="src/ios/LoadingView.swift"  target-dir="src"/>
+        <source-file src="src/ios/UnreadMessagesCounter.swift"  target-dir="src"/>
+        <source-file src="src/ios/URLBuilder.swift"  target-dir="src"/>
+        <source-file src="src/ios/WebViewAnimationCoordinator.swift"  target-dir="src"/>
+        <source-file src="src/ios/WebViewBridge.swift"  target-dir="src"/>
+        <header-file src="src/ios/LiveChatPlugin.h" />
+        <source-file src="src/ios/LiveChatPlugin.m" />
     </platform>
 </plugin>
