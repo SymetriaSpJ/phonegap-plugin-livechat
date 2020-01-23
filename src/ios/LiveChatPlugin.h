@@ -20,9 +20,9 @@
 @interface LiveChatPlugin : CDVPlugin
 
 // Open the LiveChat window
-- (void)livechat:(CDVInvokedUrlCommand *)command;
+- (void)open:(CDVInvokedUrlCommand *)command;
 
 //Initialize the LiveChat with licenseID and group
-- (void)init:(CDVInvokedUrlCommand *)command;
+- (void)authorize:(CDVInvokedUrlCommand *)command;
 
 @end

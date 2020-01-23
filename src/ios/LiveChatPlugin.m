@@ -17,7 +17,6 @@
 
 #import "LiveChatPlugin.h"
 #import <Cordova/CDVPlugin.h>
-#import "Act_Support-Swift.h"
 
 @implementation LiveChatPlugin
 
