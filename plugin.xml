@@ -42,22 +42,11 @@
             </feature>
         </config-file>
 
-        <header-file src="src/ios/LiveChat-Bridging-Header.h"/>
-        <source-file src="src/ios/ChatView.swift"  target-dir="src"/>
-        <source-file src="src/ios/JSONRequestCache.swift"  target-dir="src"/>
-        <source-file src="src/ios/KeyboardNotification.swift"  target-dir="src"/>
-        <source-file src="src/ios/LiveChat.swift"  target-dir="src"/>
-        <source-file src="src/ios/LiveChat.h"  target-dir="src"/>
-        <source-file src="src/ios/LiveChatConfiguration.swift"  target-dir="src"/>
-        <source-file src="src/ios/LiveChatMessage.swift"  target-dir="src"/>
-        <source-file src="src/ios/LiveChatOverlayViewController.swift"  target-dir="src"/>
-        <source-file src="src/ios/LiveChatState.swift"  target-dir="src"/>
-        <source-file src="src/ios/LiveChatWidget.js"  target-dir="src"/>
-        <source-file src="src/ios/LoadingView.swift"  target-dir="src"/>
-        <source-file src="src/ios/UnreadMessagesCounter.swift"  target-dir="src"/>
-        <source-file src="src/ios/URLBuilder.swift"  target-dir="src"/>
-        <source-file src="src/ios/WebViewAnimationCoordinator.swift"  target-dir="src"/>
-        <source-file src="src/ios/WebViewBridge.swift"  target-dir="src"/>
+        <js-module name="LiveChat" src="www/liveChat.js">
+            <clobbers target="window.plugins.liveChat" />
+        </js-module>
+
+        <framework custom="true" src="src/ios/LiveChat.framework" />
         <header-file src="src/ios/LiveChatPlugin.h" />
         <source-file src="src/ios/LiveChatPlugin.m" />
     </platform>
