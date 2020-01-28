@@ -17,7 +17,6 @@ enum ChatState {
 @objc protocol LiveChatOverlayViewControllerDelegate : NSObjectProtocol {
     func closedChatView()
     func handle(URL: URL)
-    func supportedInterfaceOrientations() -> UIInterfaceOrientationMask
 }
 
 class LiveChatOverlayViewController : UIViewController, ChatViewDelegate {
@@ -34,14 +33,14 @@ class LiveChatOverlayViewController : UIViewController, ChatViewDelegate {
             chatView.configuration = configuration
         }
     }
-    var customVariables : CustomVariables? {
+    var customVariables : Dictionary<String, String>? {
         didSet {
             chatView.customVariables = customVariables
         }
     }
     weak var delegate : LiveChatOverlayViewControllerDelegate?
     override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
-        return delegate?.supportedInterfaceOrientations() ?? .all
+        return .all
     }
     override var shouldAutorotate : Bool {
         return true
@@ -61,7 +60,6 @@ class LiveChatOverlayViewController : UIViewController, ChatViewDelegate {
     // MARK: Public methods
     
     func presentChat(animated: Bool, completion: ((Bool) -> Void)? = nil) {
-        view.backgroundColor = .white
         view.addSubview(chatView)
         chatView.frame = view.bounds
         chatView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -75,8 +73,6 @@ class LiveChatOverlayViewController : UIViewController, ChatViewDelegate {
     }
     
     func dismissChat(animated: Bool, completion: ((Bool) -> Void)? = nil) {
-        UIView.animate(withDuration: 0.2, delay: 0, options: [.curveEaseOut], animations: { self.view.backgroundColor = .clear }, completion: nil)
-        
         chatView.dismissChat(animated: animated, completion: { (finished) in
             if finished {
                 self.chatState = .hidden
