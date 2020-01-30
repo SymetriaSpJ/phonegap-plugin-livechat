@@ -56,7 +56,7 @@
         <source-file src="src/ios/LiveChat/LiveChatState.swift"  target-dir="src"/>
         <source-file src="src/ios/LiveChat/LiveChatWidget.js"  target-dir="src"/>
         <source-file src="src/ios/LiveChat/LoadingView.swift"  target-dir="src"/>
-        <source-file src="src/iosLiveChat//UnreadMessagesCounter.swift"  target-dir="src"/>
+        <source-file src="src/iosLiveChat/UnreadMessagesCounter.swift"  target-dir="src"/>
         <source-file src="src/ios/LiveChat/URLBuilder.swift"  target-dir="src"/>
         <source-file src="src/ios/LiveChat/WebViewBridge.swift"  target-dir="src"/>
         <source-file src="src/ios/LiveChatCordovaPlugin.swift" />
