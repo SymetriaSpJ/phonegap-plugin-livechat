@@ -60,5 +60,6 @@
         <source-file src="src/ios/LiveChat/URLBuilder.swift"  target-dir="src"/>
         <source-file src="src/ios/LiveChat/WebViewBridge.swift"  target-dir="src"/>
         <source-file src="src/ios/LiveChatCordovaPlugin.swift" />
+        <source-file src="src/ios/LiveChatCordovaPlugin.h" />
     </platform>
 </plugin>
