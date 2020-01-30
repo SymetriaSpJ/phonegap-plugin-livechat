@@ -37,8 +37,7 @@
     <platform name="ios">
         <config-file target="config.xml" parent="/*">
             <feature name="LiveChat">
-                <param name="ios-package" value="LiveChat"/>
-                <param name="onload" value="true"/>
+                <param name="ios-package" value="LiveChatCordovaPlugin"/>
             </feature>
         </config-file>
 
@@ -46,23 +45,20 @@
             <clobbers target="window.plugins.liveChat" />
         </js-module>
 
-        <header-file src="src/ios/LiveChat-Bridging-Header.h"/>
-        <source-file src="src/ios/ChatView.swift"  target-dir="src"/>
-        <source-file src="src/ios/JSONRequestCache.swift"  target-dir="src"/>
-        <source-file src="src/ios/KeyboardNotification.swift"  target-dir="src"/>
-        <source-file src="src/ios/LiveChat.swift"  target-dir="src"/>
-        <source-file src="src/ios/LiveChat-Swift.h"  target-dir="src"/>
-        <source-file src="src/ios/LiveChatConfiguration.swift"  target-dir="src"/>
-        <source-file src="src/ios/LiveChatMessage.swift"  target-dir="src"/>
-        <source-file src="src/ios/LiveChatOverlayViewController.swift"  target-dir="src"/>
-        <source-file src="src/ios/LiveChatState.swift"  target-dir="src"/>
-        <source-file src="src/ios/LiveChatWidget.js"  target-dir="src"/>
-        <source-file src="src/ios/LoadingView.swift"  target-dir="src"/>
-        <source-file src="src/ios/UnreadMessagesCounter.swift"  target-dir="src"/>
-        <source-file src="src/ios/URLBuilder.swift"  target-dir="src"/>
-        <source-file src="src/ios/WebViewAnimationCoordinator.swift"  target-dir="src"/>
-        <source-file src="src/ios/WebViewBridge.swift"  target-dir="src"/>
-        <header-file src="src/ios/LiveChatPlugin.h" />
-        <source-file src="src/ios/LiveChatPlugin.m" />
+        <source-file src="src/ios/LiveChat/ChatView.swift"  target-dir="src"/>
+        <source-file src="src/ios/LiveChat/JSONRequestCache.swift"  target-dir="src"/>
+        <source-file src="src/ios/LiveChat/KeyboardNotification.swift"  target-dir="src"/>
+        <source-file src="src/ios/LiveChat/LiveChat.swift"  target-dir="src"/>
+        <source-file src="src/ios/LiveChat/LiveChat.h"  target-dir="src"/>
+        <source-file src="src/ios/LiveChat/LiveChatConfiguration.swift"  target-dir="src"/>
+        <source-file src="src/ios/LiveChat/LiveChatMessage.swift"  target-dir="src"/>
+        <source-file src="src/ios/LiveChat/LiveChatOverlayViewController.swift"  target-dir="src"/>
+        <source-file src="src/ios/LiveChat/LiveChatState.swift"  target-dir="src"/>
+        <source-file src="src/ios/LiveChat/LiveChatWidget.js"  target-dir="src"/>
+        <source-file src="src/ios/LiveChat/LoadingView.swift"  target-dir="src"/>
+        <source-file src="src/iosLiveChat//UnreadMessagesCounter.swift"  target-dir="src"/>
+        <source-file src="src/ios/LiveChat/URLBuilder.swift"  target-dir="src"/>
+        <source-file src="src/ios/LiveChat/WebViewBridge.swift"  target-dir="src"/>
+        <source-file src="src/ios/LiveChatCordovaPlugin.swift" />
     </platform>
 </plugin>

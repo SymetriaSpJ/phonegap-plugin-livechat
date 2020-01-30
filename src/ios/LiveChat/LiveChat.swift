@@ -9,14 +9,21 @@
 import Foundation
 import UIKit
 
+typealias CustomVariables = [(String, String)]
+
 @objc public protocol LiveChatDelegate : NSObjectProtocol {
     @objc optional func received(message: LiveChatMessage)
     @objc optional func handle(URL: URL)
     @objc optional func chatPresented()
     @objc optional func chatDismissed()
+    @objc optional func supportedInterfaceOrientations() -> UIInterfaceOrientationMask
 }
 
 public class LiveChat : NSObject {
+    
+    @available(iOS 13.0, *)
+    @objc public static var windowScene: UIWindowScene?
+    
     @objc public static var licenseId : String? {
         didSet {
             updateConfiguration()
@@ -37,7 +44,6 @@ public class LiveChat : NSObject {
             updateConfiguration()
         }
     }
-    @objc public static var allCustomVariables : Dictionary<String, String>?
     
     @objc public static weak var delegate : LiveChatDelegate? {
         didSet {
@@ -87,14 +93,14 @@ private class Manager : NSObject, LiveChatOverlayViewControllerDelegate, WebView
             overlayViewController.configuration = configuration
         }
     }
-    var customVariables : Dictionary<String, String>? {
+    var customVariables : CustomVariables? {
         didSet {
             overlayViewController.customVariables = customVariables
         }
     }
     weak var delegate : LiveChatDelegate?
     fileprivate let overlayViewController = LiveChatOverlayViewController()
-    private let window = PassThroughWindow()
+    fileprivate let window = PassThroughWindow()
     private var previousKeyWindow : UIWindow?
     private let webViewBridge = WebViewBridge()
     static let sharedInstance: Manager = {
@@ -122,20 +128,26 @@ private class Manager : NSObject, LiveChatOverlayViewControllerDelegate, WebView
     
     // MARK: Public methods
     
-    func setVariable(withKey key: String, value: String) {
-        var mutableCustomVariables = customVariables
+    func setVariable(withKey key: String, value: String)
+    {
+        let pair = (key, value)
+        var mutableCustomVariables = customVariables ?? []
         
-        if mutableCustomVariables == nil {
-            mutableCustomVariables = [:]
-        }
-        
-        mutableCustomVariables?[key] = value
-        
+        if let index = mutableCustomVariables.firstIndex(where: { $0.0 == key }) {
+            mutableCustomVariables[index] = pair
+        } else {
+            mutableCustomVariables.append(pair)
+        }        
         self.customVariables = mutableCustomVariables
     }
     
     func presentChat(animated: Bool, completion: ((Bool) -> Void)? = nil) {
         previousKeyWindow = UIApplication.shared.keyWindow
+        if #available(iOS 13.0, *) {
+            if LiveChat.windowScene != nil {
+                window.windowScene = LiveChat.windowScene
+            }
+        }
         window.makeKeyAndVisible()
         
         overlayViewController.presentChat(animated: animated, completion: { (finished) in
@@ -181,8 +193,23 @@ private class Manager : NSObject, LiveChatOverlayViewControllerDelegate, WebView
         window.isHidden = true
     }
     
+    @objc func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return delegate?.supportedInterfaceOrientations?() ?? .all
+    }
+    
     @objc func handle(URL: URL) {
-        delegate?.handle?(URL: URL)
+        if let delegate = self.delegate {            
+            if delegate.responds(to: #selector(LiveChatDelegate.handle(URL:))) {
+                delegate.handle?(URL: URL)
+                return
+            }
+        }
+        
+        if #available(iOS 10, *) {
+            UIApplication.shared.open(URL, options: [:], completionHandler: nil)
+        } else {
+            UIApplication.shared.openURL(URL)
+        }
     }
     
     // MARK: WebViewBridgeDelegate
