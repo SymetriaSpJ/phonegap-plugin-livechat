@@ -6,7 +6,7 @@ LiveChat.prototype.authorize = function(options, successCallback, errorCallback)
     cordova.exec(
         successCallback,
         errorCallback,
-        "LiveChat",
+        "LiveChatCordovaPlugin",
         "authorize",
         [{
             "license": options.license,
@@ -21,7 +21,7 @@ LiveChat.prototype.open = function(successCallback, errorCallback) {
     cordova.exec(
         successCallback,
         errorCallback,
-        "LiveChat",
+        "LiveChatCordovaPlugin",
         "open",
         []
     );
@@ -31,7 +31,7 @@ LiveChat.prototype.destroy = function(successCallback, errorCallback) {
     cordova.exec(
         successCallback,
         errorCallback,
-        "LiveChat",
+        "LiveChatCordovaPlugin",
         "destroy",
         []
     );
@@ -41,7 +41,7 @@ LiveChat.prototype.isAgentAvailable = function(successCallback, errorCallback) {
     cordova.exec(
         successCallback,
         errorCallback,
-        "LiveChat",
+        "LiveChatCordovaPlugin",
         "isAgentAvailable",
         []
     );

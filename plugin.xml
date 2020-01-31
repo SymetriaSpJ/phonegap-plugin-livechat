@@ -16,7 +16,7 @@
 
     <platform name="android">
         <config-file target="res/xml/config.xml" parent="/*">
-            <feature name="LiveChat">
+            <feature name="LiveChatCordovaPlugin">
                 <param name="android-package" value="com.fitatu.phonegap.plugin.liveChat.LiveChatCordovaPlugin"/>
             </feature>
         </config-file>
@@ -36,7 +36,7 @@
 
     <platform name="ios">
         <config-file target="config.xml" parent="/*">
-            <feature name="LiveChat">
+            <feature name="LiveChatCordovaPlugin">
                 <param name="ios-package" value="LiveChatCordovaPlugin"/>
             </feature>
         </config-file>
@@ -59,7 +59,8 @@
         <source-file src="src/ios/LiveChat/UnreadMessagesCounter.swift"  target-dir="src"/>
         <source-file src="src/ios/LiveChat/URLBuilder.swift"  target-dir="src"/>
         <source-file src="src/ios/LiveChat/WebViewBridge.swift"  target-dir="src"/>
+
         <source-file src="src/ios/LiveChatCordovaPlugin.swift" />
-        <source-file src="src/ios/LiveChatCordovaPlugin.h" />
+        <dependency id="cordova-plugin-add-swift-support" version="3.1.1"/>
     </platform>
 </plugin>
