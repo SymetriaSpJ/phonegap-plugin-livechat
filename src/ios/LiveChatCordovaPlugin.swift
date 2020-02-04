@@ -3,42 +3,23 @@
     func authorize(command: CDVInvokedUrlCommand) {
         var pluginResult = CDVPluginResult (status: CDVCommandStatus_ERROR, messageAs: "Authorization failed");
 
-        let obj:AnyObject = command.arguments[0] as AnyObject
+        let liveChatParameters:AnyObject = command.arguments[0] as AnyObject
 
-        print("#0");
-        print(command.arguments[0]);
+        if let liveChatObject = liveChatParameters as? [String:Any] {
+            LiveChat.licenseId = liveChatObject["license"] as? String;
+            LiveChat.groupId = liveChatObject["groupId"] as? String;
+            LiveChat.name = liveChatObject["name"] as? String;
+            LiveChat.email = liveChatObject["email"] as? String;
 
-        do {
-            let jsonData = try JSONSerialization.data(withJSONObject: obj, options: .prettyPrinted)
-            print("#1");
-            print(jsonData);
-
-            let decoded = try JSONSerialization.jsonObject(with: jsonData, options: [])
-            print("#2");
-            print(decoded);
-
-            if let dictFromJSON = decoded as? [String:String] {
-                let email = dictFromJSON["email"] as String?;
-                let license = dictFromJSON["license"] as String?;
-                let name = dictFromJSON["name"] as String?;
-                let groupId = dictFromJSON["groupId"] as String?;
-                let crm = dictFromJSON["crm"] as String?;
-
-                LiveChat.licenseId = license;
-                LiveChat.groupId = groupId;
-                LiveChat.name = name;
-                LiveChat.email = email;
-
-                print("#3");
-                print(dictFromJSON)
-                print(crm);
-
-                pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: "Authorization succeeded");
+            if let crmObject = liveChatObject["crm"] as? [String:String] {
+                LiveChat.setVariable(withKey: crmObject["key"] as! String, value: crmObject["value"] as! String);
             }
-        } catch {
-            print(error.localizedDescription)
 
-            pluginResult = CDVPluginResult(status: CDVCommandStatus_ERROR, messageAs: error.localizedDescription);
+            if let userObject = liveChatObject["user"] as? [String:String] {
+                LiveChat.setVariable(withKey: userObject["key"] as! String, value: userObject["value"] as! String);
+            }
+
+            pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: "Authorization succeeded");
         }
 
         self.commandDelegate!.send(pluginResult, callbackId: command.callbackId);
@@ -46,16 +27,32 @@
 
     @objc(open:)
     func open(command: CDVInvokedUrlCommand) {
-      var pluginResult = CDVPluginResult (status: CDVCommandStatus_ERROR, messageAs: "The Plugin Failed");
+        var pluginResult = CDVPluginResult (status: CDVCommandStatus_ERROR, messageAs: "The Plugin Failed");
 
-        do {
-            if (!LiveChat.isChatPresented) {
-                LiveChat.presentChat();
+        if (!LiveChat.isChatPresented) {
+            LiveChat.presentChat();
 
-                pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: "Open succeeded");
-            }
+            pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: "Open succeeded");
         }
 
-      self.commandDelegate!.send(pluginResult, callbackId: command.callbackId);
+        self.commandDelegate!.send(pluginResult, callbackId: command.callbackId);
+    }
+
+    @objc(destroy:)
+    func destroy(command: CDVInvokedUrlCommand) {
+        let pluginResult = CDVPluginResult (status: CDVCommandStatus_OK, messageAs: "Destroy succeeded");
+
+        LiveChat.dismissChat();
+
+        self.commandDelegate!.send(pluginResult, callbackId: command.callbackId);
+    }
+
+    @objc(clearSession:)
+    func clearSession(command: CDVInvokedUrlCommand) {
+        let pluginResult = CDVPluginResult (status: CDVCommandStatus_OK, messageAs: "Clear session succeeded");
+
+        LiveChat.clearSession();
+
+        self.commandDelegate!.send(pluginResult, callbackId: command.callbackId);
     }
 }

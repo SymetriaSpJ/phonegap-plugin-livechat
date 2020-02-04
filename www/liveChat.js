@@ -14,6 +14,7 @@ LiveChat.prototype.authorize = function(options, successCallback, errorCallback)
             "name": options.name || OPTIONAL_PARAM_DEFAULT_VALUE,
             "email": options.email || OPTIONAL_PARAM_DEFAULT_VALUE,
             "crm": options.crm || OPTIONAL_PARAM_DEFAULT_VALUE,
+            "user": options.user || OPTIONAL_PARAM_DEFAULT_VALUE,
         }]
     );
 };
@@ -44,6 +45,16 @@ LiveChat.prototype.isAgentAvailable = function(successCallback, errorCallback) {
         errorCallback,
         "LiveChatCordovaPlugin",
         "isAgentAvailable",
+        []
+    );
+};
+
+LiveChat.prototype.clearSession = function(successCallback, errorCallback) {
+    cordova.exec(
+        successCallback,
+        errorCallback,
+        "LiveChatCordovaPlugin",
+        "clearSession",
         []
     );
 };
