@@ -54,13 +54,14 @@
         <source-file src="src/ios/LiveChat/LiveChatMessage.swift"  target-dir="src"/>
         <source-file src="src/ios/LiveChat/LiveChatOverlayViewController.swift"  target-dir="src"/>
         <source-file src="src/ios/LiveChat/LiveChatState.swift"  target-dir="src"/>
-        <source-file src="src/ios/LiveChat/LiveChatWidget.js"  target-dir="src"/>
         <source-file src="src/ios/LiveChat/LoadingView.swift"  target-dir="src"/>
         <source-file src="src/ios/LiveChat/UnreadMessagesCounter.swift"  target-dir="src"/>
         <source-file src="src/ios/LiveChat/URLBuilder.swift"  target-dir="src"/>
         <source-file src="src/ios/LiveChat/WebViewBridge.swift"  target-dir="src"/>
 
         <source-file src="src/ios/LiveChatCordovaPlugin.swift" />
+
+        <resource-file src="src/ios/LiveChat/LiveChatWidget.js"/>
         <dependency id="cordova-plugin-add-swift-support" version="3.1.1"/>
     </platform>
 </plugin>

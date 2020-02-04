@@ -1,15 +1,56 @@
 @objc(LiveChatCordovaPlugin) class LiveChatCordovaPlugin : CDVPlugin {
-  @objc(open:) // Declare your function name.
-  func open(command: CDVInvokedUrlCommand) { // write the function code.
-    /*
-     * Always assume that the plugin will fail.
-     * Even if in this example, it can't.
-     */
-    // Set the plugin result to fail.
-    var pluginResult = CDVPluginResult (status: CDVCommandStatus_ERROR, messageAs: "The Plugin Failed");
-    // Set the plugin result to succeed.
-        pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: "The plugin succeeded");
-    // Send the function result back to Cordova.
-    self.commandDelegate!.send(pluginResult, callbackId: command.callbackId);
-  }
+    @objc(authorize:)
+    func authorize(command: CDVInvokedUrlCommand) {
+        var pluginResult = CDVPluginResult (status: CDVCommandStatus_ERROR, messageAs: "The Plugin Failed");
+
+        let obj:AnyObject = command.arguments[0] as AnyObject
+
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: obj, options: .prettyPrinted)
+            let decoded = try JSONSerialization.jsonObject(with: jsonData, options: [])
+
+            if let dictFromJSON = decoded as? [String:String] {
+                let email = dictFromJSON["email"] as String?;
+                let license = dictFromJSON["license"] as String?;
+                let name = dictFromJSON["name"] as String?;
+                let groupId = dictFromJSON["groupId"] as String?;
+                // use dictFromJSON
+
+                print(dictFromJSON)
+                print(email)
+                print(license)
+                print(groupId)
+                print(name)
+
+                LiveChat.licenseId = license;
+                LiveChat.groupId = groupId;
+                LiveChat.name = name;
+                LiveChat.email = email;
+
+
+                pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: "The plugin succeeded");
+            }
+        } catch {
+            print(error.localizedDescription)
+            pluginResult = CDVPluginResult(status: CDVCommandStatus_ERROR, messageAs: error.localizedDescription);
+        }
+
+        self.commandDelegate.run(inBackground: {
+//             print(obj);
+
+        })
+
+
+
+        self.commandDelegate!.send(pluginResult, callbackId: command.callbackId);
+    }
+
+    @objc(open:)
+    func open(command: CDVInvokedUrlCommand) {
+      var pluginResult = CDVPluginResult (status: CDVCommandStatus_ERROR, messageAs: "The Plugin Failed");
+
+          pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: "The plugin succeeded");
+
+      self.commandDelegate!.send(pluginResult, callbackId: command.callbackId);
+    }
 }
