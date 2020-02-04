@@ -12,7 +12,8 @@ LiveChat.prototype.authorize = function(options, successCallback, errorCallback)
             "license": options.license,
             "groupId": options.groupId || OPTIONAL_PARAM_DEFAULT_VALUE,
             "name": options.name || OPTIONAL_PARAM_DEFAULT_VALUE,
-            "email": options.email || OPTIONAL_PARAM_DEFAULT_VALUE
+            "email": options.email || OPTIONAL_PARAM_DEFAULT_VALUE,
+            "crm": options.crm || OPTIONAL_PARAM_DEFAULT_VALUE,
         }]
     );
 };
