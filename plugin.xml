@@ -60,6 +60,7 @@
         <source-file src="src/ios/LiveChat/WebViewBridge.swift"  target-dir="src"/>
 
         <source-file src="src/ios/LiveChatCordovaPlugin.swift" />
+        <header-file src="src/ios/LiveChatCordovaPlugin-Bridging-Header.h" />
 
         <resource-file src="src/ios/LiveChat/LiveChatWidget.js"/>
         <dependency id="cordova-plugin-add-swift-support" version="3.1.1"/>
