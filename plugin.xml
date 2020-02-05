@@ -16,7 +16,7 @@
 
     <platform name="android">
         <config-file target="res/xml/config.xml" parent="/*">
-            <feature name="LiveChat">
+            <feature name="LiveChatCordovaPlugin">
                 <param name="android-package" value="com.fitatu.phonegap.plugin.liveChat.LiveChatCordovaPlugin"/>
             </feature>
         </config-file>
@@ -32,5 +32,37 @@
         <source-file src="src/android/LiveChatCordovaPlugin.java" target-dir="src/com/fitatu/phonegap/plugin/LiveChat/" />
 
         <framework src="src/android/build-extras.gradle" custom="true" type="gradleReference" />
+    </platform>
+
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="LiveChatCordovaPlugin">
+                <param name="ios-package" value="LiveChatCordovaPlugin"/>
+            </feature>
+        </config-file>
+
+        <js-module name="LiveChat" src="www/liveChat.js">
+            <clobbers target="window.plugins.liveChat" />
+        </js-module>
+
+        <source-file src="src/ios/LiveChat/ChatView.swift"  target-dir="src"/>
+        <source-file src="src/ios/LiveChat/JSONRequestCache.swift"  target-dir="src"/>
+        <source-file src="src/ios/LiveChat/KeyboardNotification.swift"  target-dir="src"/>
+        <source-file src="src/ios/LiveChat/LiveChat.swift"  target-dir="src"/>
+        <source-file src="src/ios/LiveChat/LiveChat.h"  target-dir="src"/>
+        <source-file src="src/ios/LiveChat/LiveChatConfiguration.swift"  target-dir="src"/>
+        <source-file src="src/ios/LiveChat/LiveChatMessage.swift"  target-dir="src"/>
+        <source-file src="src/ios/LiveChat/LiveChatOverlayViewController.swift"  target-dir="src"/>
+        <source-file src="src/ios/LiveChat/LiveChatState.swift"  target-dir="src"/>
+        <source-file src="src/ios/LiveChat/LoadingView.swift"  target-dir="src"/>
+        <source-file src="src/ios/LiveChat/UnreadMessagesCounter.swift"  target-dir="src"/>
+        <source-file src="src/ios/LiveChat/URLBuilder.swift"  target-dir="src"/>
+        <source-file src="src/ios/LiveChat/WebViewBridge.swift"  target-dir="src"/>
+
+        <source-file src="src/ios/LiveChatCordovaPlugin.swift" />
+        <header-file src="src/ios/LiveChatCordovaPlugin-Bridging-Header.h" />
+
+        <resource-file src="src/ios/LiveChat/LiveChatWidget.js"/>
+        <dependency id="cordova-plugin-add-swift-support" version="2.0.2"/>
     </platform>
 </plugin>

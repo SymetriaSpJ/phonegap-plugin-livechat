@@ -6,13 +6,15 @@ LiveChat.prototype.authorize = function(options, successCallback, errorCallback)
     cordova.exec(
         successCallback,
         errorCallback,
-        "LiveChat",
+        "LiveChatCordovaPlugin",
         "authorize",
         [{
             "license": options.license,
             "groupId": options.groupId || OPTIONAL_PARAM_DEFAULT_VALUE,
             "name": options.name || OPTIONAL_PARAM_DEFAULT_VALUE,
-            "email": options.email || OPTIONAL_PARAM_DEFAULT_VALUE
+            "email": options.email || OPTIONAL_PARAM_DEFAULT_VALUE,
+            "crm": options.crm || OPTIONAL_PARAM_DEFAULT_VALUE,
+            "user": options.user || OPTIONAL_PARAM_DEFAULT_VALUE,
         }]
     );
 };
@@ -21,7 +23,7 @@ LiveChat.prototype.open = function(successCallback, errorCallback) {
     cordova.exec(
         successCallback,
         errorCallback,
-        "LiveChat",
+        "LiveChatCordovaPlugin",
         "open",
         []
     );
@@ -31,7 +33,7 @@ LiveChat.prototype.destroy = function(successCallback, errorCallback) {
     cordova.exec(
         successCallback,
         errorCallback,
-        "LiveChat",
+        "LiveChatCordovaPlugin",
         "destroy",
         []
     );
@@ -41,8 +43,18 @@ LiveChat.prototype.isAgentAvailable = function(successCallback, errorCallback) {
     cordova.exec(
         successCallback,
         errorCallback,
-        "LiveChat",
+        "LiveChatCordovaPlugin",
         "isAgentAvailable",
+        []
+    );
+};
+
+LiveChat.prototype.clearSession = function(successCallback, errorCallback) {
+    cordova.exec(
+        successCallback,
+        errorCallback,
+        "LiveChatCordovaPlugin",
+        "clearSession",
         []
     );
 };
