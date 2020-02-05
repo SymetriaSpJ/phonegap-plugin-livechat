@@ -63,6 +63,6 @@
         <header-file src="src/ios/LiveChatCordovaPlugin-Bridging-Header.h" />
 
         <resource-file src="src/ios/LiveChat/LiveChatWidget.js"/>
-        <dependency id="cordova-plugin-add-swift-support" version="3.1.1"/>
+        <dependency id="cordova-plugin-add-swift-support" version="2.0.2"/>
     </platform>
 </plugin>
