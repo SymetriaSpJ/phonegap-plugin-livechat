@@ -21,9 +21,6 @@ typealias CustomVariables = [(String, String)]
 
 public class LiveChat : NSObject {
     
-    @available(iOS 13.0, *)
-    @objc public static var windowScene: UIWindowScene?
-    
     @objc public static var licenseId : String? {
         didSet {
             updateConfiguration()
@@ -44,41 +41,41 @@ public class LiveChat : NSObject {
             updateConfiguration()
         }
     }
-    
+
     @objc public static weak var delegate : LiveChatDelegate? {
         didSet {
             Manager.sharedInstance.delegate = delegate
         }
     }
-    
+
     @objc public static var isChatPresented : Bool {
         get {
             return Manager.sharedInstance.overlayViewController.chatState == .presented
         }
     }
-    
+
     @objc public static var unreadMessagesCount : Int {
         get {
             return UnreadMessagesCounter.counterValue
         }
     }
-    
+
     @objc public class func setVariable(withKey key: String, value: String) {
         Manager.sharedInstance.setVariable(withKey: key, value: value)
     }
-    
+
     @objc public class func presentChat(animated: Bool = true, completion: ((Bool) -> Void)? = nil) {
         Manager.sharedInstance.presentChat(animated: animated, completion: completion)
     }
-    
+
     @objc public class func dismissChat(animated: Bool = true, completion: ((Bool) -> Void)? = nil) {
         Manager.sharedInstance.dismissChat(animated: animated, completion: completion)
     }
-    
+
     @objc public class func clearSession() {
         Manager.sharedInstance.clearSession()
     }
-    
+
     private class func updateConfiguration() {
         if let licenseId = self.licenseId {
             let conf = LiveChatConfiguration(licenseId: licenseId, groupId: self.groupId ?? "0", name: self.name ?? "", email: self.email ?? "")
@@ -106,48 +103,43 @@ private class Manager : NSObject, LiveChatOverlayViewControllerDelegate, WebView
     static let sharedInstance: Manager = {
         return Manager()
     }()
-    
+
     override init() {
         window.backgroundColor = UIColor.clear
         window.frame = UIScreen.main.bounds
         window.windowLevel = UIWindowLevelNormal + 1
         window.rootViewController = overlayViewController
-        
+
         super.init()
-        
+
         webViewBridge.delegate = self
         overlayViewController.delegate = self
         overlayViewController.webViewBridge = webViewBridge
-        
+
         NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationDidBecomeActive, object: nil, queue: nil) { (notification) in
             if let keyWindow = UIApplication.shared.keyWindow {
                 self.window.frame = keyWindow.frame
             }
         }
     }
-    
+
     // MARK: Public methods
-    
+
     func setVariable(withKey key: String, value: String)
     {
         let pair = (key, value)
         var mutableCustomVariables = customVariables ?? []
-        
+
         if let index = mutableCustomVariables.firstIndex(where: { $0.0 == key }) {
             mutableCustomVariables[index] = pair
         } else {
             mutableCustomVariables.append(pair)
-        }        
+        }
         self.customVariables = mutableCustomVariables
     }
-    
+
     func presentChat(animated: Bool, completion: ((Bool) -> Void)? = nil) {
         previousKeyWindow = UIApplication.shared.keyWindow
-        if #available(iOS 13.0, *) {
-            if LiveChat.windowScene != nil {
-                window.windowScene = LiveChat.windowScene
-            }
-        }
         window.makeKeyAndVisible()
         
         overlayViewController.presentChat(animated: animated, completion: { (finished) in
