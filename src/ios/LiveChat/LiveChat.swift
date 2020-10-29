@@ -186,7 +186,7 @@ private class Manager : NSObject, LiveChatOverlayViewControllerDelegate, WebView
     }
     
     @objc func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return delegate?.supportedInterfaceOrientations?() ?? .Portrait
+        return delegate?.supportedInterfaceOrientations?() ?? .portrait
     }
     
     @objc func handle(URL: URL) {
