@@ -96,8 +96,8 @@ class ChatView : UIView, WKNavigationDelegate, WKUIDelegate, WKScriptMessageHand
         addSubview(loadingView)
         
         let nc = NotificationCenter.default
-            nc.addObserver(self, selector: #selector(applicationDidBecomeActiveNotification), name: UIApplication.didBecomeActiveNotification
-        , object: nil)
+        nc.addObserver(self, selector: #selector(applicationDidBecomeActiveNotification), name: UIApplication.didBecomeActiveNotification
+            , object: nil)
         nc.addObserver(self, selector: #selector(applicationWillResignActiveNotification), name: UIApplication.willResignActiveNotification, object: nil)
     }
     
@@ -252,7 +252,6 @@ class ChatView : UIView, WKNavigationDelegate, WKUIDelegate, WKScriptMessageHand
         if #available(iOS 11.0, *) {
             safeAreaInsets = self.safeAreaInsets
         } else {
-            //safeAreaInsets = UIEdgeInsetsMake(UIApplication.shared.statusBarFrame.size.height, 0, 0, 0)
             safeAreaInsets = UIEdgeInsets.init(top: UIApplication.shared.statusBarFrame.size.height, left: 0, bottom: 0, right: 0)
         }
         let frameForSafeAreaInsets = CGRect(x: safeAreaInsets.left, y: safeAreaInsets.top, width: bounds.size.width - safeAreaInsets.left - safeAreaInsets.right, height: bounds.size.height - safeAreaInsets.top - safeAreaInsets.bottom)
