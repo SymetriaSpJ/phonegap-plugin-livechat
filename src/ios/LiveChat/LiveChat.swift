@@ -198,7 +198,6 @@ private class Manager : NSObject, LiveChatOverlayViewControllerDelegate, WebView
         }
         
         if #available(iOS 10, *) {
-            //UIApplication.shared.open(URL, options: [:], completionHandler: nil)
             UIApplication.shared.open(URL, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
         } else {
             UIApplication.shared.openURL(URL)
