@@ -12,11 +12,11 @@
             LiveChat.email = liveChatObject["email"] as? String;
 
             if let crmObject = liveChatObject["crm"] as? [String:String] {
-                LiveChat.setVariable(withKey: crmObject["key"] as! String, value: crmObject["value"] as! String);
+                LiveChat.setVariable(withKey: crmObject["key"]!, value: crmObject["value"]!);
             }
 
             if let userObject = liveChatObject["user"] as? [String:String] {
-                LiveChat.setVariable(withKey: userObject["key"] as! String, value: userObject["value"] as! String);
+                LiveChat.setVariable(withKey: userObject["key"]!, value: userObject["value"]!);
             }
 
             pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: "Authorization succeeded");
