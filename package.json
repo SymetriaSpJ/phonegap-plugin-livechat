@@ -1,7 +1,7 @@
 {
-  "name": "fitatu-phonegap-plugin-livechat",
+  "name": "cordova-plugin-livechat",
   "version": "0.0.1",
-  "description": "LiveChat phonegap plugin",
+  "description": "LiveChat cordova plugin",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
